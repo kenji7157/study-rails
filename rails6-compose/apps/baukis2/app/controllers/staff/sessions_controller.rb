@@ -1,4 +1,6 @@
 class Staff::SessionsController < Staff::Base
+  skip_before_action :authorize
+  
   def new
     if current_staff_member
       reditrect_to :staff_root
@@ -20,6 +22,7 @@ class Staff::SessionsController < Staff::Base
       else
         session[:staff_member_id] = staff_member.id
         flash.notice = "ログインしました"
+        session[:last_access_time] = Time.current
         redirect_to :staff_root
       end
     else

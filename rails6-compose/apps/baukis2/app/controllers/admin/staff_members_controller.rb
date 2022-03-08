@@ -1,7 +1,6 @@
 class Admin::StaffMembersController < Admin::Base
   def index
     @staff_members = StaffMember.order(:family_name_kana, :given_name_kana)
-    render action: "index"
   end
 
   def show

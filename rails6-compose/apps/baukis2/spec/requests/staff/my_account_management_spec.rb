@@ -10,11 +10,11 @@ describe "職員による自分のアカウントの管理" do
         }
       }
   end
-  
+
   describe "更新" do
     let(:params_hash) { attributes_for(:staff_member) }
     let(:staff_member) { create(:staff_member) }
-    
+
     example "email属性を変更する" do
       params_hash.merge!(email: "test@example.com")
       patch staff_account_url,
@@ -28,7 +28,7 @@ describe "職員による自分のアカウントの管理" do
         to raise_error(ActionController::ParameterMissing)
     end
 
-    example "end_dataの値は書き換え不可" do
+    example "end_dateの値は書き換え不可" do
       params_hash.merge!(end_date: Date.tomorrow)
       expect {
         patch staff_account_url,
