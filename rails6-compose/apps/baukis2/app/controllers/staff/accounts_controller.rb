@@ -1,12 +1,10 @@
 class Staff::AccountsController < Staff::Base
   def show
     @staff_member = current_staff_member
-    render action: "show"
   end
 
   def edit
     @staff_member = current_staff_member
-    render action: "edit"
   end
 
   def update
