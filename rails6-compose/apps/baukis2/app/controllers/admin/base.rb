@@ -2,11 +2,11 @@ class Admin::Base < ApplicationController
   before_action :authorize
   before_action :check_account
   before_action :check_timeout
-  
+
   private def current_administrator
     if session[:administrator_id]
-      @current_staff_member ||=
-      Administrator.find_by(id: session[:administrator_id])
+      @current_administrator ||=
+        Administrator.find_by(id: session[:administrator_id])
     end
   end
 
@@ -31,8 +31,8 @@ class Admin::Base < ApplicationController
 
   private def check_timeout
     if current_administrator
-      if session[:last_access_time] >= TIMEOUT.ago
-        session[:last_access_time] = Time.current
+      if session[:admin_last_access_time] >= TIMEOUT.ago
+        session[:admin_last_access_time] = Time.current
       else
         session.delete(:administrator_id)
         flash.alert = "セッションがタイムアウトしました。"
